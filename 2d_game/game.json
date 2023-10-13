@@ -1,0 +1,15 @@
+{
+  "scene01": {
+    "bgColor": "0x242121",
+    "button01": {
+      "bgColor": "0x00ff00",
+      "width": 100,
+      "length": 100,
+      "text": "START GAME",
+      "position": {
+        "x": 200,
+        "y": 200
+      }
+    }
+  }
+}
