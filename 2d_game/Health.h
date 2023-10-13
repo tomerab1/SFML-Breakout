@@ -9,14 +9,18 @@ class Health : public GameEntity {
  public:
   Health();
 
-  virtual void render(sf::RenderWindow& window) override;
-  virtual void update(float dt) override;
-  virtual void update(float dt, GameEntity& entity) override;
-  virtual void setTexture(std::shared_ptr<sf::Texture> texture) override;
-  virtual CollisionType checkCollisions() override;
-  virtual CollisionType checkCollisions(sf::Shape& shape) override;
-  virtual sf::Shape& getEntity() override;
+  void render(sf::RenderWindow& window) override;
+  void update(float dt) override;
+  void update(float dt, GameEntity& entity) override;
+  void setTexture(std::shared_ptr<sf::Texture> texture) override;
+  uint32_t onBallHitFloor();
+  uint32_t getNumOfLifes() const;
 
  private:
+  CollisionType checkCollisions() override;
+  CollisionType checkCollisions(sf::Shape& shape) override;
+  sf::Shape& getEntity() override;
+
   std::array<sf::RectangleShape, NUM_OF_LIFES> m_hearts;
+  uint32_t m_numOfLifes = NUM_OF_LIFES;
 };

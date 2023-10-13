@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 
+#include "EventEmitter.h"
 #include "Globals.h"
 
 GameScene::GameScene() : m_score{0}, m_font{std::make_unique<sf::Font>()} {
@@ -22,7 +23,15 @@ GameScene::GameScene() : m_score{0}, m_font{std::make_unique<sf::Font>()} {
 void GameScene::update(float dt) {
   m_ball.update(dt);
 
-  int i = 0;
+  if (m_ball.checkCollisions() == CollisionType::LOWER_WALL) {
+    uint32_t numOfLifes = m_health.onBallHitFloor();
+    if (numOfLifes == 0) {
+      GameEvent event;
+      event.eventType = GameEventTypes::GAME_OVER;
+      EventEmitter::emit(event);
+    }
+  }
+
   auto it = m_bricks.begin();
   while (it != m_bricks.end()) {
     if (it->getHealth() <= 0) {

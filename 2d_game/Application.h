@@ -20,9 +20,12 @@ class Application {
   void loadScenes();
   void onPause();
   void onKeypress(const sf::Event& event);
+  void handleUserInput();
+  void handleGameEvent();
 
   sf::RenderWindow m_window;
   std::stack<std::unique_ptr<Scene>> m_scenes;
 
   bool m_isPaused = false;
+  bool m_isRunning = true;
 };

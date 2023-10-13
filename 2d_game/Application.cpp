@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include "EventEmitter.h"
 #include "GameScene.h"
 #include "Globals.h"
 #include "PauseScene.h"
@@ -18,25 +19,14 @@ int Application::exec() {
   try {
     sf::Clock clock;
 
-    while (m_window.isOpen()) {
+    while (m_window.isOpen() && m_isRunning) {
       sf::Time dt = clock.restart();
-      sf::Event event;
 
       m_window.setFramerateLimit(60);
       m_window.setVerticalSyncEnabled(true);
 
-      while (m_window.pollEvent(event)) {
-        switch (event.type) {
-          case sf::Event::Closed:
-            m_window.close();
-            break;
-          case sf::Event::KeyPressed:
-            onKeypress(event);
-            break;
-          default:
-            break;
-        }
-      }
+      handleUserInput();
+      handleGameEvent();
 
       if (!m_isPaused) {
         update(static_cast<float>(dt.asMilliseconds()));
@@ -47,6 +37,38 @@ int Application::exec() {
   } catch (std::exception& ex) {
     std::cout << ex.what() << '\n';
     return EXIT_FAILURE;
+  }
+}
+
+void Application::handleUserInput() {
+  sf::Event event;
+  while (m_window.pollEvent(event)) {
+    switch (event.type) {
+      case sf::Event::Closed:
+        m_window.close();
+        break;
+      case sf::Event::KeyPressed:
+        onKeypress(event);
+        break;
+      default:
+        break;
+    }
+  }
+}
+
+void Application::handleGameEvent() {
+  GameEvent gameEvent;
+  while (EventEmitter::pollEvent(gameEvent)) {
+    switch (gameEvent.eventType) {
+      case GameEventTypes::GAME_OVER:
+        m_isRunning = false;
+        break;
+      case GameEventTypes::GAME_NONE:
+      case GameEventTypes::GAME_PAUSED:
+        break;
+      default:
+        break;
+    }
   }
 }
 
