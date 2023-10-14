@@ -1,15 +1,11 @@
 #include "StartGameScene.h"
 
+#include "FontFactory.h"
 #include "EventEmitter.h"
 #include "Globals.h"
 
 StartGameScene::StartGameScene() {
-  if (!m_font->loadFromFile(
-          R"(C:\Users\tomer\OneDrive\Desktop\public-pixel-font\PublicPixel-z84yD.ttf)")) {
-    throw std::runtime_error("Could not load font");
-  }
-
-  m_text.setFont(*m_font.get());
+  m_text.setFont(FontFactory::getFont(FONT_PATH));
   m_text.setCharacterSize(50);
   m_text.setString(R"(
         PRESS 'SPACE' TO
@@ -17,7 +13,7 @@ StartGameScene::StartGameScene() {
     )");
 
   m_text.setPosition(
-      sf::Vector2f(SCREEN_WIDTH / 2 - 900, SCREEN_HEIGHT / 2 - 225));
+      sf::Vector2f(SCREEN_WIDTH / 2 - 800, SCREEN_HEIGHT / 2 - 125));
 }
 
 void StartGameScene::update(float dt) {

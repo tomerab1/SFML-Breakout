@@ -2,6 +2,8 @@
 
 #include <cstdint>
 
+constexpr const char* FONT_PATH = R"(.\Res\PublicPixel-z84yD.ttf)";
+
 constexpr uint32_t SCREEN_WIDTH = 1920;
 constexpr uint32_t SCREEN_HEIGHT = 1080;
 constexpr uint32_t SCREEN_COLLISION_PADDING = 10;

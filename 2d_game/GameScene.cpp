@@ -3,16 +3,12 @@
 #include <algorithm>
 #include <iostream>
 
+#include "FontFactory.h"
 #include "EventEmitter.h"
 #include "Globals.h"
 
 GameScene::GameScene() {
-  if (!m_font->loadFromFile(
-          R"(C:\Users\tomer\OneDrive\Desktop\public-pixel-font\PublicPixel-z84yD.ttf)")) {
-    throw std::runtime_error("Could not load font");
-  }
-
-  m_text.setFont(*m_font.get());
+  m_text.setFont(FontFactory::getFont(FONT_PATH));
   m_text.setCharacterSize(20);
   m_text.setPosition(SCREEN_WIDTH - 200, SCREEN_COLLISION_PADDING);
   m_text.setString("SCORE: " + std::to_string(m_score));
