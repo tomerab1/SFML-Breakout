@@ -23,9 +23,9 @@ class GameScene : public Scene {
   Paddle m_paddle;
   Health m_health;
 
-  uint32_t m_score;
+  uint32_t m_score{0u};
 
   sf::Text m_text;
-  std::unique_ptr<sf::Font> m_font;
+  std::unique_ptr<sf::Font> m_font{std::make_unique<sf::Font>()};
   std::vector<Brick> m_bricks;
 };

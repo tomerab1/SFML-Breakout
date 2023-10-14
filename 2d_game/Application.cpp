@@ -6,6 +6,7 @@
 #include "GameScene.h"
 #include "Globals.h"
 #include "PauseScene.h"
+#include "StartGameScene.h"
 #include "TextureFactory.h"
 #include "Utils.h"
 
@@ -19,7 +20,7 @@ int Application::exec() {
   try {
     sf::Clock clock;
 
-    while (m_window.isOpen() && m_isRunning) {
+    while (m_window.isOpen()) {
       sf::Time dt = clock.restart();
 
       m_window.setFramerateLimit(60);
@@ -61,7 +62,11 @@ void Application::handleGameEvent() {
   while (EventEmitter::pollEvent(gameEvent)) {
     switch (gameEvent.eventType) {
       case GameEventTypes::GAME_OVER:
-        m_isRunning = false;
+        m_window.close();
+        break;
+      case GameEventTypes::GAME_START:
+        m_scenes.emplace(std::make_unique<GameScene>());
+        m_isRunning = true;
         break;
       case GameEventTypes::GAME_NONE:
       case GameEventTypes::GAME_PAUSED:
@@ -95,16 +100,18 @@ void Application::loadAssets() const {
 }
 
 void Application::loadScenes() {
-  m_scenes.emplace(std::make_unique<GameScene>());
+  m_scenes.emplace(std::make_unique<StartGameScene>());
 }
 
 void Application::onPause() { m_isPaused = !m_isPaused; }
 
 void Application::onKeypress(const sf::Event& event) {
-  if (event.key.scancode == sf::Keyboard::Scan::Space && !m_isPaused) {
+  if (m_isRunning && event.key.scancode == sf::Keyboard::Scan::Space &&
+      !m_isPaused) {
     m_scenes.emplace(std::make_unique<PauseScene>());
     onPause();
-  } else if (event.key.scancode == sf::Keyboard::Scan::Space && m_isPaused) {
+  } else if (m_isRunning && event.key.scancode == sf::Keyboard::Scan::Space &&
+             m_isPaused) {
     m_scenes.pop();
     onPause();
   }

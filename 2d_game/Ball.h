@@ -24,6 +24,6 @@ class Ball : public GameEntity {
 
  private:
   sf::CircleShape m_ball;
-  sf::Vector2f m_velocity;
-  uint32_t m_damage;
+  sf::Vector2f m_velocity{BALL_VELOCITY, BALL_VELOCITY};
+  uint32_t m_damage = 50u;
 };

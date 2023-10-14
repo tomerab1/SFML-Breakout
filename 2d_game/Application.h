@@ -27,5 +27,5 @@ class Application {
   std::stack<std::unique_ptr<Scene>> m_scenes;
 
   bool m_isPaused = false;
-  bool m_isRunning = true;
+  bool m_isRunning = false;
 };

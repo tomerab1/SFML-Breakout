@@ -7,7 +7,7 @@ constexpr uint32_t SCREEN_HEIGHT = 1080;
 constexpr uint32_t SCREEN_COLLISION_PADDING = 10;
 
 constexpr float BALL_VELOCITY = 0.7f;
-constexpr uint32_t BALL_RADIUS = 15;
+constexpr uint32_t BALL_RADIUS = 10;
 
 constexpr float PADDLE_VELOCITY = 1.f;
 constexpr uint32_t PADDLE_HEIGHT = 20;
@@ -26,7 +26,10 @@ enum class CollisionType {
   LOWER_WALL,
   RIGHT_WALL,
   LEFT_WALL,
-  PADDLE,
+  PADDLE_LEFT,
+  PADDLE_RIGHT,
+  PADDLE_UPPER,
+  PADDLE_LOWER,
   BRICK_LEFT,
   BRICK_RIGHT,
   BRICK_UPPER,

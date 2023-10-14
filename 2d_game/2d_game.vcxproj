@@ -135,11 +135,13 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="EventEmitter.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="PauseScene.cpp" />
+    <ClCompile Include="StartGameScene.cpp" />
     <ClCompile Include="TextureFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,12 +154,14 @@
     <ClInclude Include="EventEmitter.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameEvent.h" />
+    <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="PauseScene.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="StartGameScene.h" />
     <ClInclude Include="TextureFactory.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>

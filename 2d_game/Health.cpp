@@ -1,12 +1,14 @@
 #include "Health.h"
 
+#include <iostream>
+
 #include "TextureFactory.h"
 
 Health::Health() {
-  int i = SCREEN_COLLISION_PADDING;
+  uint32_t i = SCREEN_COLLISION_PADDING;
 
   for (auto& heart : m_hearts) {
-    heart.setPosition(SCREEN_COLLISION_PADDING * i / 2,
+    heart.setPosition(SCREEN_COLLISION_PADDING * i / 2.f,
                       SCREEN_COLLISION_PADDING);
     heart.setTexture(TextureFactory::getTexture("heart").get());
     heart.setSize(sf::Vector2f(35, 35));
@@ -37,6 +39,7 @@ void Health::setTexture(std::shared_ptr<sf::Texture> texture) {
 
 uint32_t Health::onBallHitFloor() {
   m_numOfLifes = std::max(m_numOfLifes - 1, 0u);
+  std::cout << m_numOfLifes << '\n';
   return m_numOfLifes;
 }
 

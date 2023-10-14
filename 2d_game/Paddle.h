@@ -2,25 +2,26 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Ball.h"
 #include "GameEntity.h"
 #include "Globals.h"
 
 class Paddle : public GameEntity {
  public:
   Paddle();
-  virtual void render(sf::RenderWindow& window) override;
-  virtual void update(float dt, GameEntity& ball) override;
-  virtual void setTexture(std::shared_ptr<sf::Texture> texture) override;
-  virtual sf::Shape& getEntity() override;
+  void render(sf::RenderWindow& window) override;
+  void update(float dt, GameEntity& ball) override;
+  void update(float dt) override;
+  void setTexture(std::shared_ptr<sf::Texture> texture) override;
+  sf::Shape& getEntity() override;
 
  private:
-  virtual CollisionType checkCollisions() override;
-  virtual CollisionType checkCollisions(sf::Shape& shape) override;
+  CollisionType checkCollisions() override;
+  CollisionType checkCollisions(sf::Shape& shape) override;
+  void resolveCollisionPaddleWall(float& posX, float& posY);
+  void resolveCollisionPaddleBall(Ball& ball, CollisionType collisionType);
 
  public:
   sf::RectangleShape m_paddle;
-  sf::Vector2f m_velocity;
-
-  // Inherited via GameEntity
-  virtual void update(float dt) override;
+  sf::Vector2f m_velocity{PADDLE_VELOCITY, PADDLE_VELOCITY};
 };

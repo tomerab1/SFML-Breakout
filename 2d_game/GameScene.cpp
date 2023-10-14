@@ -6,7 +6,7 @@
 #include "EventEmitter.h"
 #include "Globals.h"
 
-GameScene::GameScene() : m_score{0}, m_font{std::make_unique<sf::Font>()} {
+GameScene::GameScene() {
   if (!m_font->loadFromFile(
           R"(C:\Users\tomer\OneDrive\Desktop\public-pixel-font\PublicPixel-z84yD.ttf)")) {
     throw std::runtime_error("Could not load font");
@@ -26,8 +26,7 @@ void GameScene::update(float dt) {
   if (m_ball.checkCollisions() == CollisionType::LOWER_WALL) {
     uint32_t numOfLifes = m_health.onBallHitFloor();
     if (numOfLifes == 0) {
-      GameEvent event;
-      event.eventType = GameEventTypes::GAME_OVER;
+      GameEvent event{GameEventTypes::GAME_OVER};
       EventEmitter::emit(event);
     }
   }

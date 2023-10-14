@@ -20,7 +20,7 @@ void Brick::update(float dt) {}
 
 void Brick::update(float dt, GameEntity& entity) {
   CollisionType collisionType = checkCollisions(entity.getEntity());
-  Ball& ball = (Ball&)entity;
+  Ball& ball = dynamic_cast<Ball&>(entity);
   auto [ballVelX, ballVelY] = ball.getVelocity();
   auto [ballPosX, ballPosY] = ball.getPosition();
 
@@ -58,7 +58,8 @@ void Brick::update(float dt, GameEntity& entity) {
 CollisionType Brick::checkCollisions() { return CollisionType::NONE; }
 
 CollisionType Brick::checkCollisions(sf::Shape& shape) {
-  sf::CircleShape& circle = ((sf::CircleShape&)shape);
+  const sf::CircleShape& circle = ((sf::CircleShape&)shape);
+
   auto [circleX, circleY] =
       circle.getPosition() + sf::Vector2f(BALL_RADIUS, BALL_RADIUS);
   auto [brickX, brickY] =

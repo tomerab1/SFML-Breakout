@@ -1,6 +1,6 @@
 #include "Ball.h"
 
-Ball::Ball() : m_velocity{BALL_VELOCITY, BALL_VELOCITY}, m_damage{50} {
+Ball::Ball() {
   m_ball.setFillColor(sf::Color::White);
   m_ball.setPosition(SCREEN_WIDTH / 2 + 200, SCREEN_HEIGHT / 2 + 200);
   m_ball.setRadius(BALL_RADIUS);
