@@ -81,15 +81,15 @@ CollisionType Paddle::checkCollisions(sf::Shape& shape) {
 
   auto [circleX, circleY] =
       circle.getPosition() + sf::Vector2f(BALL_RADIUS, BALL_RADIUS);
-  auto [brickX, brickY] =
-      m_paddle.getPosition() + sf::Vector2f(BRICK_WIDTH / 2, BRICK_LENGTH / 2);
+  auto [paddleX, paddleY] = m_paddle.getPosition() +
+                            sf::Vector2f(PADDLE_WIDTH / 2, PADDLE_HEIGHT / 2);
 
   if (circle.getGlobalBounds().intersects(m_paddle.getGlobalBounds())) {
-    if (circleY > brickY)
+    if (circleY > paddleY)
       return CollisionType::PADDLE_LOWER;
-    else if (circleY < brickY)
+    else if (circleY < paddleY)
       return CollisionType::PADDLE_UPPER;
-    else if (circleX < brickX)
+    else if (circleX < paddleX)
       return CollisionType::PADDLE_LEFT;
     else
       return CollisionType::PADDLE_RIGHT;
