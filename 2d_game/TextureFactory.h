@@ -5,15 +5,17 @@
 #include <unordered_map>
 
 class TextureFactory {
-public:
-	static std::shared_ptr<sf::Texture> getTexture(std::string&& textureName);
-	static void loadTexture(std::string&& texturePath, std::string&& textureName);
+ public:
+  using ret_type = std::shared_ptr<sf::Texture>;
 
-private:
-	TextureFactory();
-	TextureFactory(TextureFactory&);
-	TextureFactory(TextureFactory&&);
+  static ret_type getTexture(const std::string& textureName);
+  static void loadTexture(const std::string& texturePath,
+                          const std::string& textureName);
 
-private:
-	static std::unordered_map<std::string, std::shared_ptr<sf::Texture>> m_textureMap;
+ private:
+  TextureFactory();
+  TextureFactory(TextureFactory&);
+  TextureFactory(TextureFactory&&);
+
+  static std::unordered_map<std::string, ret_type> m_textureMap;
 };

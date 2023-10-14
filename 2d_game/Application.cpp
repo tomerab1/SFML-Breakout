@@ -3,11 +3,12 @@
 #include <iostream>
 
 #include "EventEmitter.h"
+#include "Exceptions.h"
 #include "GameScene.h"
 #include "Globals.h"
 #include "PauseScene.h"
+#include "ResourceLocator.h"
 #include "StartGameScene.h"
-#include "TextureFactory.h"
 #include "Utils.h"
 
 Application::Application(const std::string& title)
@@ -88,15 +89,18 @@ void Application::render() {
 void Application::update(float dt) { m_scenes.top()->update(dt); }
 
 void Application::loadAssets() const {
-  TextureFactory::loadTexture(
-      R"(C:\Users\tomer\OneDrive\Desktop\Breakout_Tile_Set_Free\Breakout Tile Set Free\PNG\01-Breakout-Tiles.png)",
-      "blueBrick");
-  TextureFactory::loadTexture(
-      R"(C:\Users\tomer\OneDrive\Desktop\Breakout_Tile_Set_Free\Breakout Tile Set Free\PNG\02-Breakout-Tiles.png)",
-      "blueBrickBreaking");
-  TextureFactory::loadTexture(
-      R"(C:\Users\tomer\OneDrive\Desktop\Breakout_Tile_Set_Free\Breakout Tile Set Free\PNG\60-Breakout-Tiles.png)",
-      "heart");
+  try {
+    ResourceLocator<TextureFactory>::loadTexture(
+        R"(.\Res\01-Breakout-Tiles.png)", "blueBrick");
+    ResourceLocator<TextureFactory>::loadTexture(
+        R"(.\Res\02-Breakout-Tiles.png)", "blueBrickBreaking");
+    ResourceLocator<TextureFactory>::loadTexture(
+        R"(.\Res\60-Breakout-Tiles.png)", "heart");
+  } catch (LoadTextureException& ex) {
+    std::cout << ex.what() << '\n';
+  } catch (...) {
+    std::cout << "Unknown exception" << '\n';
+  }
 }
 
 void Application::loadScenes() {
