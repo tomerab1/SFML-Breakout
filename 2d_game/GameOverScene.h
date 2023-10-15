@@ -6,7 +6,7 @@
 
 class GameOverScene : public Scene {
  public:
-  GameOverScene();
+  explicit GameOverScene(uint32_t score);
 
   void update(float dt) override;
   void render(sf::RenderWindow& window) override;

@@ -4,6 +4,7 @@
 
 #include "EventEmitter.h"
 #include "Exceptions.h"
+#include "GameOverScene.h"
 #include "GameScene.h"
 #include "Globals.h"
 #include "PauseScene.h"
@@ -62,9 +63,11 @@ void Application::handleGameEvent() {
   GameEvent gameEvent;
   while (EventEmitter::pollEvent(gameEvent)) {
     switch (gameEvent.eventType) {
-      case GameEventTypes::GAME_OVER:
-        m_window.close();
-        break;
+      case GameEventTypes::GAME_OVER: {
+        uint32_t score = dynamic_cast<GameScene&>(*m_scenes.top()).getScore();
+        m_scenes.emplace(std::make_unique<GameOverScene>(score));
+        m_isGameOver = true;
+      } break;
       case GameEventTypes::GAME_START:
         m_scenes.emplace(std::make_unique<GameScene>());
         m_isRunning = true;
@@ -110,12 +113,13 @@ void Application::loadScenes() {
 void Application::onPause() { m_isPaused = !m_isPaused; }
 
 void Application::onKeypress(const sf::Event& event) {
-  if (m_isRunning && event.key.scancode == sf::Keyboard::Scan::Space &&
-      !m_isPaused) {
+  if (!m_isRunning) return;
+  if (m_isGameOver) return;
+
+  if (event.key.scancode == sf::Keyboard::Scan::Space && !m_isPaused) {
     m_scenes.emplace(std::make_unique<PauseScene>());
     onPause();
-  } else if (m_isRunning && event.key.scancode == sf::Keyboard::Scan::Space &&
-             m_isPaused) {
+  } else if (event.key.scancode == sf::Keyboard::Scan::Space && m_isPaused) {
     m_scenes.pop();
     onPause();
   }

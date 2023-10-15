@@ -3,8 +3,8 @@
 #include <algorithm>
 #include <iostream>
 
-#include "FontFactory.h"
 #include "EventEmitter.h"
+#include "FontFactory.h"
 #include "Globals.h"
 
 GameScene::GameScene() {
@@ -52,6 +52,8 @@ void GameScene::render(sf::RenderWindow& window) {
     brick.render(window);
   }
 }
+
+uint32_t GameScene::getScore() const { return m_score; }
 
 void GameScene::generateBricks() {
   for (int i = 0; i < BRICKS_IN_ROW; i++) {

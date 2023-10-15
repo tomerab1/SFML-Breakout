@@ -15,6 +15,7 @@ class GameScene : public Scene {
 
   void update(float dt) override;
   void render(sf::RenderWindow& window) override;
+  uint32_t getScore() const;
 
  private:
   void generateBricks();

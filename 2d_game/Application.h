@@ -28,4 +28,5 @@ class Application {
 
   bool m_isPaused = false;
   bool m_isRunning = false;
+  bool m_isGameOver = false;
 };
