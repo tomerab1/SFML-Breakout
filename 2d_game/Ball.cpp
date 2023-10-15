@@ -2,7 +2,8 @@
 
 Ball::Ball() {
   m_ball.setFillColor(sf::Color::White);
-  m_ball.setPosition(SCREEN_WIDTH / 2 + 200, SCREEN_HEIGHT / 2 + 200);
+  m_ball.setPosition((SCREEN_WIDTH / 2) - BALL_RADIUS,
+                     SCREEN_HEIGHT - (PADDLE_HEIGHT  + BALL_RADIUS) * 2);
   m_ball.setRadius(BALL_RADIUS);
 }
 
