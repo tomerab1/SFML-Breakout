@@ -97,8 +97,8 @@ void Application::loadAssets() const {
 		ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\01-Breakout-Tiles.png)", "blueBrick");
 		ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\02-Breakout-Tiles.png)", "blueBrickBreaking");
 		ResourceLocator<TextureFactory>::loadTexture(R"(.\Res\60-Breakout-Tiles.png)", "heart");
-		ResourceLocator<AudioFactory>::loadAudio(R"(C:\Users\tomer\OneDrive\Desktop\fireworks-whistle.mp3)", "fireworkWhistle");
-		ResourceLocator<AudioFactory>::loadAudio(R"(C:\Users\tomer\OneDrive\Desktop\firework_explosion.wav)", "fireworkExplosion");
+		ResourceLocator<AudioFactory>::loadAudio(R"(.\Res\fireworks-whistle.mp3)", "fireworkWhistle");
+		ResourceLocator<AudioFactory>::loadAudio(R"(.\Res\firework_explosion.wav)", "fireworkExplosion");
 	}
 	catch (LoadTextureException& ex) {
 		std::cout << ex.what() << '\n';
