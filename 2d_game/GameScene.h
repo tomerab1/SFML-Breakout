@@ -10,23 +10,23 @@
 #include "Scene.h"
 
 class GameScene : public Scene {
- public:
-  GameScene();
+public:
+	GameScene();
 
-  void update(float dt) override;
-  void render(sf::RenderWindow& window) override;
-  uint32_t getScore() const;
+	void update(float dt) override;
+	void render(sf::RenderWindow& window) override;
+	uint32_t getScore() const;
 
- private:
-  void generateBricks();
+private:
+	void generateBricks();
 
-  Ball m_ball;
-  Paddle m_paddle;
-  Health m_health;
+	Ball m_ball;
+	Paddle m_paddle;
+	Health m_health;
 
-  uint32_t m_score{0u};
+	uint32_t m_score{ 0u };
 
-  sf::Text m_text;
-  std::unique_ptr<sf::Font> m_font{std::make_unique<sf::Font>()};
-  std::vector<Brick> m_bricks;
+	sf::Text m_text;
+	std::unique_ptr<sf::Font> m_font{ std::make_unique<sf::Font>() };
+	std::vector<Brick> m_bricks;
 };

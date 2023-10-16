@@ -1,7 +1,7 @@
-#include "Application.h"
+ #include "Application.h"
 
-int main()
+ int main()
 {
-    Application app("Breakout");
-    return app.exec();
-}
+     Application app("Breakout");
+     return app.exec();
+ }

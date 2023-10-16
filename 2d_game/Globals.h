@@ -8,10 +8,10 @@ constexpr uint32_t SCREEN_WIDTH = 1920;
 constexpr uint32_t SCREEN_HEIGHT = 1080;
 constexpr uint32_t SCREEN_COLLISION_PADDING = 10;
 
-constexpr float BALL_VELOCITY = 0.7f;
+constexpr float BALL_VELOCITY = 700.f;
 constexpr uint32_t BALL_RADIUS = 10;
 
-constexpr float PADDLE_VELOCITY = 1.f;
+constexpr float PADDLE_VELOCITY = 750.f;
 constexpr uint32_t PADDLE_HEIGHT = 20;
 constexpr uint32_t PADDLE_WIDTH = 200;
 

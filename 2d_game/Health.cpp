@@ -23,7 +23,7 @@ void Health::render(sf::RenderWindow& window) {
 
 void Health::update(float dt) {
   static float scaleFactor = 1.0f;
-  float scaleSpeed = 0.001f;
+  float scaleSpeed = 0.75f;
 
   for (uint32_t i = 0; i < m_numOfLifes; i++) {
     m_hearts[i].setScale(std::sin(scaleFactor), 1.f);
@@ -39,7 +39,6 @@ void Health::setTexture(std::shared_ptr<sf::Texture> texture) {
 
 uint32_t Health::onBallHitFloor() {
   m_numOfLifes = std::max(m_numOfLifes - 1, 0u);
-  std::cout << m_numOfLifes << '\n';
   return m_numOfLifes;
 }
 
